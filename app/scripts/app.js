@@ -9,7 +9,7 @@ angular.module('tinStreetApp', ['ui.router', 'ngAnimate'])
       .state('instrument', {
         url: '/instrument',
         templateUrl: 'views/partials/instrument.html',
-        controller: function ($scope, $state) {
+        controller: ['$scope', '$state', function ($scope, $state) {
           $scope.instrument = $state.params.instrument;
           $scope.title = 'Instrument Market Depth';
           $scope.status = 'Loaded';
@@ -34,13 +34,13 @@ angular.module('tinStreetApp', ['ui.router', 'ngAnimate'])
             }
             console.log($scope.status);
           };
-        }
+        }]
       })
       .state('instrument.depth', {
         url: '/depth/:instrument',
         template: '<market-depth instrument="instrument"></market-depth>',
-        controller: function ($scope, $state) {
+        controller: ['$scope', '$state', function ($scope, $state) {
           $scope.instrument = $state.params.instrument;
-        }
+        }]
       });
   });
