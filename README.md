@@ -1,14 +1,14 @@
 TinStreet-client
 ================
 
-h3. First Time Setup
+### First Time Setup
 
 * clone the repo
 * run `npm install` at the root
 * run `bower install` at the root
 * run `grunt server` at the root
 
-h3. Deploy to Github Pages
+### Deploy to Github Pages
 
 * run `grunt server:dist` at the root
 * commit your changes to master
