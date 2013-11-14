@@ -18,3 +18,18 @@ body {
   background: #24252C;
   padding: 1em;
 }
+
+.select2-container {
+  width: 100%;
+}
+
+.select2-container .select2-choice {
+  height: 2.3125em;
+  line-height: 2.125em;
+  font-size: 0.875em;
+  border-radius: 0;
+}
+
+.select2-container .select2-choice .select2-arrow {
+  border-radius: 0;
+}

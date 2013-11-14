@@ -13,19 +13,7 @@
     </div>
   </div>
   <div class="content row">
-    <div class="small-12 columns">
-      <form class="row collapse" ng-submit="search()">
-        <label>Instrument</label>
-        <div class="small-9 columns">
-          <input type="text" name="instrument" ng-model="instrument">
-        </div>
-        <div class="small-3 columns">
-          <button type="submit" class="button postfix"><i class="fa fa-search"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-    <div ui-view></div>
+    <market-depth instrument="instrument" loading="loading"></market-depth>
   </div>
   <div class="footer row" ng-click="cycleStatus()">
     <div ng-switch on="status | lowercase">

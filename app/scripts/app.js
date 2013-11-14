@@ -1,22 +1,21 @@
 'use strict';
 
-angular.module('tinStreetApp', ['ui.router', 'ngAnimate'])
+angular.module('tinStreetApp', ['ui.router', 'ngAnimate', 'ui.select2'])
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/instrument');
+    $urlRouterProvider.otherwise('/marketDepth');
 
     $stateProvider
-      .state('instrument', {
-        url: '/instrument',
+      .state('marketDepth', {
+        url: '/marketDepth',
         templateUrl: 'views/partials/instrument.html',
         controller: ['$scope', '$state', function ($scope, $state) {
-          $scope.instrument = $state.params.instrument;
+          $scope.instrument = '';//$state.params.instrument;
+
           $scope.title = 'Instrument Market Depth';
           $scope.status = 'Loaded';
 
-          $scope.search = function () {
-            $state.go('instrument.depth', {instrument: $scope.instrument});
-          };
+          $scope.loading = false;
 
           var statuses = [
             'Loading',
@@ -24,6 +23,10 @@ angular.module('tinStreetApp', ['ui.router', 'ngAnimate'])
             'Error',
             'Saved'
           ];
+
+          $scope.$watch('loading', function (loading) {
+            $scope.status = (loading) ? 'Loading' : 'Loaded';
+          });
 
           $scope.cycleStatus = function () {
             var i = statuses.indexOf($scope.status) + 1;
@@ -34,12 +37,7 @@ angular.module('tinStreetApp', ['ui.router', 'ngAnimate'])
             }
             console.log($scope.status);
           };
-        }]
-      })
-      .state('instrument.depth', {
-        url: '/depth/:instrument',
-        template: '<market-depth instrument="instrument"></market-depth>',
-        controller: ['$scope', '$state', function ($scope, $state) {
+          $scope.searching = false;
           $scope.instrument = $state.params.instrument;
         }]
       });
