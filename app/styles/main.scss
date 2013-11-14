@@ -1,0 +1,20 @@
+@import "foundation/scss/normalize";
+
+$primary-color: #2069B0;
+$secondary-color: #444444;
+$alert-color: #FF726D;
+$success-color: #6CB57B;
+$global-radius: 2px;
+@import "foundation/scss/foundation";
+
+$fa-font-path: "../bower_components/font-awesome/fonts";
+@import "font-awesome/scss/font-awesome";
+
+$container-background: #FFFFFF;
+@import "container";
+@import "market-depth";
+
+body {
+  background: #24252C;
+  padding: 1em;
+}

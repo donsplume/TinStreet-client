@@ -1,0 +1,24 @@
+<div class="small-12 columns">
+  <div class="row collapse">
+    <div class="small-6 columns">
+      <div class="bid header">Bid</div>
+    </div>
+    <div class="small-6 columns">
+      <div class="offer header">Offer</div>
+    </div>
+    <ul class="small-6 columns no-bullet">
+      <li ng-repeat="bid in depth.bids | orderBy:'price'" class="bid" ng-class="{touch: $first}">
+        <div>
+          {{bid.price}}
+        </div>
+      </li>
+    </ul>
+    <ul class="small-6 columns no-bullet">
+      <li ng-repeat="offer in depth.offers | orderBy:'+price'" class="offer" ng-class="{touch: $first}">
+        <div>
+          {{offer.price}}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
