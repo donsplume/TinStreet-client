@@ -19,6 +19,16 @@ body {
   padding: 1em;
 }
 
+.right {
+  text-align: right;
+}
+
+.app {
+  float: left;
+  width: rem-calc(350);
+  margin: rem-calc(20);
+}
+
 .select2-container {
   width: 100%;
 }

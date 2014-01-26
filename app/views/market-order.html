@@ -1,0 +1,29 @@
+<div ng-hide="hide" class="container row" draggable>
+  <header on-close="hide = true" title="'Market Order'"></header>
+  <div class="content small-12 columns"> 
+    <div class="small-12 columns">
+      <label>Instrument</label>
+      <input type="text" name="instrument" ng-model="order.instrument">
+    </div>
+    <div class="small-12 columns">
+      <label>Direction</label>
+      <input type="text" name="direction" ng-model="order.direction">
+    </div>
+    <div class="small-12 columns">
+      <label>Order Type</label>
+      <input type="text" name="ordertype" ng-model="order.ordertype">
+    </div>
+    <div class="small-12 columns">
+      <label>Quantity</label>
+      <input type="text" name="quantity" ng-model="order.quantity">
+    </div>
+    <div class="small-12 columns">
+      <label>Price</label>
+      <input type="text" name="price" ng-model="order.price">
+    </div>
+    <div class="small-12 columns right">
+      <button type="button" class="button" ng-disabled="state == 'loading'" ng-click="submit()">Submit</button>
+    </div>
+  </div>  
+  <footer state="state"></footer>
+</div>

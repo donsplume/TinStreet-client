@@ -1,0 +1,19 @@
+<div class="footer small-12 columns">
+  <div ng-switch on="state | lowercase">
+    <div ng-switch-when="loading">
+      {{state}} <i class="fa fa-ellipsis-h"></i>
+    </div>
+    <div ng-switch-when="loaded" class="status-good">
+      {{state}} <i class="fa fa-check-circle-o"></i>
+    </div>
+    <div ng-switch-when="error" class="status-bad">
+      {{state}} <i class="fa fa-exclamation-circle"></i>
+    </div>
+    <div ng-switch-when="saved" class="status-good">
+      {{state}} <i class="fa fa-check-circle-o"></i>
+    </div>
+    <div ng-switch-default>
+      {{state || 'No Status'}} <i class="fa fa-sun-o"></i>
+    </div>
+  </div>
+</div>

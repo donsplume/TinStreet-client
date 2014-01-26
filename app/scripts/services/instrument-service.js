@@ -8,16 +8,28 @@ angular.module('tinStreetApp')
           console.log(data);
         });
       },
-      getInstruments: function () {
-        var dfd = $q.defer();
+      getExpansions: function () {      
+        return $http.get('/tinstreet/api/expansion').error(function (data, status, headers, config) {
+          console.log(data);
+        });
+      },
+      getInstruments: function (expansion) {
+        return $http.get('/tinstreet/api/printing', {
+          params: {
+            exp: expansion
+          }
+        }).error(function (data, status, headers, config) {
+          console.log(data);
+        });
+      },
+      postMarketOrder: function (order) {
+        return $http.post('/tinstreet/api/mo', order).error(function (data, status, headers, config) {
+          console.log(data);
+        });
 
-        dfd.resolve([
-          'BOP_MO.5E',
-          'GHW_MO.TR',
-          'KLG_MO.GTC'
-        ]);
-
-        return dfd.promise;
+        if (asdf =asdf){
+          
+        }
       }
     };
   });
