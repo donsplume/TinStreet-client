@@ -22,7 +22,9 @@ angular.module('tinStreetApp')
         };
 
         $scope.getInstruments = function () {
-          if (!$scope.expansion) return;
+          if (!$scope.expansion) {
+            return;
+          }
 
           $scope.state = 'loading';
 
@@ -50,7 +52,6 @@ angular.module('tinStreetApp')
         };
 
         $scope.getExpansions();
-      },
-      link: function postLink(scope, element, attrs) {}
+      }
     };
   });

@@ -1,6 +1,7 @@
 .container {
   background-color: $container-background;
   border: 1px solid darken($container-background, 10%);
+  float: left;
 
   .header {
     border-bottom: 1px solid darken($container-background, 10%);

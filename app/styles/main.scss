@@ -13,6 +13,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 $container-background: #FFFFFF;
 @import "container";
 @import "market-depth";
+@import "market-order";
 
 body {
   background: #24252C;
@@ -23,10 +24,12 @@ body {
   text-align: right;
 }
 
+label {
+  margin-top: rem-calc(10);
+}
+
 .app {
-  float: left;
-  width: rem-calc(350);
-  margin: rem-calc(20);
+  margin-bottom: rem-calc(20);
 }
 
 .select2-container {

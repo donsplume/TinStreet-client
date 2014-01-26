@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('tinStreetApp')
-  .factory('instrumentService', function ($http, $q) {
+  .factory('instrumentService', function ($http) {
     return {
       getDepth: function (instrument) {
-        return $http.get('/tinstreet/api/depth/' + instrument).error(function (data, status, headers, config) {
+        return $http.get('/tinstreet/api/depth/' + instrument).error(function (data) {
           console.log(data);
         });
       },
-      getExpansions: function () {      
-        return $http.get('/tinstreet/api/expansion').error(function (data, status, headers, config) {
+      getExpansions: function () {
+        return $http.get('/tinstreet/api/expansion').error(function (data) {
           console.log(data);
         });
       },
@@ -18,18 +18,14 @@ angular.module('tinStreetApp')
           params: {
             exp: expansion
           }
-        }).error(function (data, status, headers, config) {
+        }).error(function (data) {
           console.log(data);
         });
       },
       postMarketOrder: function (order) {
-        return $http.post('/tinstreet/api/mo', order).error(function (data, status, headers, config) {
+        return $http.post('/tinstreet/api/mo', order).error(function (data) {
           console.log(data);
         });
-
-        if (asdf =asdf){
-          
-        }
       }
     };
   });

@@ -1,13 +1,24 @@
-<div ng-hide="hide" class="container row" draggable>
+<div class="container">
   <header on-close="hide = true" title="'Market Order'"></header>
-  <div class="content small-12 columns"> 
+  <div class="content small-12 columns">
+    <div class="small-12 columns">
+      <label>Expansion</label>
+      <select name="expansion" ng-model="expansion" ng-change="getInstruments()" ui-select2 ng-disabled="state == 'loading'">
+        <option ng-repeat="expansion in expansions" value="{{expansion.mciExpId}}">{{expansion.expName}}</option>
+      </select>
+    </div>
     <div class="small-12 columns">
       <label>Instrument</label>
-      <input type="text" name="instrument" ng-model="order.instrument">
+      <select name="instrument" ng-model="order.instrument" ng-change="search()" ui-select2 ng-disabled="state == 'loading'">
+        <option ng-repeat="inst in instruments" value="{{inst.card.code}}">{{inst.card.code}}</option>
+      </select>
     </div>
     <div class="small-12 columns">
       <label>Direction</label>
-      <input type="text" name="direction" ng-model="order.direction">
+      <div class="row collapse">
+        <div class="small-6 columns buy toggle" ng-class="{active: order.direction == 'buy'}" ng-click="order.direction = 'buy'">Buy</div>
+        <div class="small-6 columns sell toggle" ng-class="{active: order.direction == 'sell'}" ng-click="order.direction = 'sell'">Sell</div>
+      </div>      
     </div>
     <div class="small-12 columns">
       <label>Order Type</label>
@@ -24,6 +35,6 @@
     <div class="small-12 columns right">
       <button type="button" class="button" ng-disabled="state == 'loading'" ng-click="submit()">Submit</button>
     </div>
-  </div>  
+  </div>
   <footer state="state"></footer>
 </div>
