@@ -2,7 +2,7 @@
 
 angular.module('tinStreet.utils', [])
 
-.factory('socketService', function() {
+.factory('socketService', ['$rootScope', function($rootScope) {
   return function (resource) {    
     var socket = {
       send: function (message) {
@@ -14,12 +14,16 @@ angular.module('tinStreet.utils', [])
     
     sock.onopen = function () {
       socket.onopen.call(this, arguments);
-    }
+    };
 
-    sock.onmessage = function () {
-      socket.onmessage.call(this, arguments);
-    }
+    sock.onmessage = function (response) {
+      console.log('socketService onmessage callback', response);
+      var data = JSON.parse(response.data);      
+      $rootScope.$apply(function () {
+        socket.onmessage.call(this, data);  
+      });
+    };
 
     return socket;
   };
-});
+}]);

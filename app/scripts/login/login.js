@@ -25,6 +25,6 @@ LoginCtrl.prototype.signIn = function() {
   	window.location.hash = 'album';
   })
   .error(function () {
-  	alert('login error, try again');
+  	window.alert('login error, try again');
   });
 };

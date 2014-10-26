@@ -5,15 +5,15 @@ angular.module('tinStreet.album', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/album', {
     templateUrl: 'scripts/album/album.html',
-    controller: 'AlbumCtrl'
+    controller: 'AlbumCtrl as album'
   });
 }])
 
-.controller('AlbumCtrl', ['socketService', '$scope', Album]);
+.controller('AlbumCtrl', ['socketService', Album]);
 
-function Album(socketService, $scope) {
+function Album(socketService) {
   var that = this;
-  $scope.items = []
+  that.items = [];
 
   var sock = socketService('album');  
 
@@ -26,9 +26,7 @@ function Album(socketService, $scope) {
     });
   };
 
-  sock.onmessage = function (response) {
-    $scope.items.push(JSON.parse(response[0].data));
-    $scope.$apply();
-    console.log(response[0].data);
-  }
+  sock.onmessage = function (data) {
+    that.items.push(data);    
+  };
 }
