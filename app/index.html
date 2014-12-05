@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <body>
+  <body ng-app="tinstreet">
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <ul ng-controller="albumController as album">
+      <li ng-repeat="row in album.rows">{{row.instrument}} {{row.hostedPosition}}/{{row.privatePosition}} {{row.bid}} {{row.ask}}</li> 
+    </ul>
   </body>
 </head>
