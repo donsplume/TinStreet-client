@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tinstreet', ['ngResource','autocomplete'])
+angular.module('tinstreet', ['ngResource','ngCookies','autocomplete'])
 
 .factory('tsFinder', function () {
     return {
@@ -8,6 +8,12 @@ angular.module('tinstreet', ['ngResource','autocomplete'])
 
         }
     }
+})
+
+.factory('tsLogin', function ($resource) {
+    return $resource('api/user/:username/login', {username:'@_username'}, {
+        'create': {method:'POST'}
+    });
 })
 
 .factory('tsCollection', function ($resource) {
@@ -18,19 +24,21 @@ angular.module('tinstreet', ['ngResource','autocomplete'])
     });
 })
 
-.controller('CollectionController', ['$http', '$scope', 'tsCollection', function ($http,$scope,tsCollection) {
-    $scope.cards = ['deathrite shaman'];
-
-    $scope.items = tsCollection.read({username:'phil'});
-
-    $scope.getCards = function (text) {
-        $http({'url':'api/card','method':'GET','params':{'name':text}}).success(function(data){
-            $scope.cards=data;
+.controller('LoginController', ['$scope', 'tsLogin', function ($scope,tsLogin) {
+    $scope.login = function () {
+        tsLogin.create($scope.user,function(data){
+            console.log(data);
         });
+        $scope.user = {};
     };
+}])
+
+.controller('CollectionController', ['$scope', '$cookies', 'tsCollection', function ($scope,$cookies,tsCollection) {
+
+    $scope.items = tsCollection.read({username:$cookies.user});
 
     $scope.add = function () {
-        $scope.printing._username = 'phil';
+        $scope.printing._username = $cookies.user;
         var newItem = angular.copy($scope.printing);
         newItem.printing = $scope.printing.code;
         newItem.privatePosition = $scope.printing.quantity;
@@ -47,7 +55,7 @@ angular.module('tinstreet', ['ngResource','autocomplete'])
     };
 }])
 
-.controller('CollectionItemController', ['$scope', 'tsCollection', function($scope,tsCollection) {
+.controller('CollectionItemController', ['$scope', '$cookies', 'tsCollection', function($scope,$cookies,tsCollection) {
 
     if ( typeof $scope.item.pending == 'undefined' ) {
         $scope.item.pending = false;
@@ -63,7 +71,7 @@ angular.module('tinstreet', ['ngResource','autocomplete'])
             });
             $scope.collectionForm.$setPristine();
             if ( Object.keys(update).length && !$scope.item.pending ) {
-                update._username = 'phil';
+                update._username = $cookies.user;
                 update._code = $scope.item.printing;
                 tsCollection.update(update, function(data) {
                 });
@@ -73,7 +81,7 @@ angular.module('tinstreet', ['ngResource','autocomplete'])
 
     $scope.deleteItem = function(idx) {
         $scope.items.splice(idx,1);
-        tsCollection.delete({username:'phil','code':$scope.item.printing},function(data) {
+        tsCollection.delete({username:$cookies.user,'code':$scope.item.printing},function(data) {
         });
     };
 }]);
