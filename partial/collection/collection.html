@@ -1,0 +1,53 @@
+<div class="col-md-12" ng-controller="CollectionCtrl">
+
+<h1>{{collectionUser}}'s collection</h1>
+<form ng-submit="addToCollection(searchInstrument.title, expansionCode,condition,newCard_foil,newCard_private,newCard_public)">
+<angucomplete-alt id="newCard"
+              placeholder="Add a new card"
+              pause="400"
+              selected-object="searchInstrument"
+              remote-url-data-field="results"
+              title-field="name"
+              input-class="form-control form-control-small"
+              remote-api-handler=searchAPI
+              > </angucomplete-alt>
+
+<select ng-model="expansionCode" ng-options="instrument.expCode as instrument.expName for instrument in searchInstrument.originalObject.instruments | unique:'instrument.expName'"></select>
+<select ng-model="condition" ng-options="instrument.condition as instrument.condition for instrument in searchInstrument.originalObject.instruments | unique:'condition'"></select>
+
+
+Foil: <input type="checkbox"
+       ng-model="newCard_foil">
+Number Privately owned: <input type="text"
+       ng-model="newCard_private">
+Number Privately owned: <input type="text"
+       ng-model="newCard_public">
+       <input type="submit">
+</form>
+
+{{expansionCode}} {{condition}} {{newCard_foil}}{{newCard_private}}
+
+<table class="table table-striped">
+<thead><tr>
+<th>Name</th>
+<th>Expansion</th>
+<th>Condition</th>
+<th>Foil?</th>
+<th>Number owned privately</th>
+<th>Number owned on Tin Street</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr ng-repeat="card in collection">
+<td>{{card.name}}</td>
+<td>{{card.expName}}</td>
+<td>{{card.condition}}</td>
+<td>{{card.foil}}</td>
+<td>{{card.privatePosition}}</td>
+<td>{{card.hostedPosition}}</td>
+<td><span ng-click="deleteItem(card.itemID)">Delete</span></td>
+</tr>
+</tbody>
+</table>
+
+</div>
