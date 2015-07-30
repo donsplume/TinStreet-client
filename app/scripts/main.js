@@ -1,3 +1,4 @@
+/*jslint node: true */
 'use strict';
 
 angular.module('tinstreet', ['ngResource','ngCookies','autocomplete'])
@@ -7,7 +8,7 @@ angular.module('tinstreet', ['ngResource','ngCookies','autocomplete'])
         getCards: function (query) {
 
         }
-    }
+    };
 })
 
 .factory('tsLogin', function ($resource) {
@@ -46,8 +47,8 @@ angular.module('tinstreet', ['ngResource','ngCookies','autocomplete'])
         $scope.items.push(newItem);
         tsCollection.create($scope.printing, function(data) {
             $scope.items.forEach(function(item,idx){
-                if (item.printing == data.printing) {
-                    $scope.items[idx] = data; 
+                if (item.printing === data.printing) {
+                    $scope.items[idx] = data;
                 }
             });
         });
@@ -57,13 +58,13 @@ angular.module('tinstreet', ['ngResource','ngCookies','autocomplete'])
 
 .controller('CollectionItemController', ['$scope', '$cookies', 'tsCollection', function($scope,$cookies,tsCollection) {
 
-    if ( typeof $scope.item.pending == 'undefined' ) {
+    if ( typeof $scope.item.pending === 'undefined' ) {
         $scope.item.pending = false;
     }
 
     $scope.updateItem = function() {
         if ($scope.collectionForm.$dirty) {
-            var update = {}
+            var update = {};
             angular.forEach($scope.collectionForm,function(value,key) {
                 if (value&&value.$dirty) {
                     update[key] = $scope.item[key];
@@ -76,7 +77,7 @@ angular.module('tinstreet', ['ngResource','ngCookies','autocomplete'])
                 tsCollection.update(update, function(data) {
                 });
             }
-        };
+        }
     };
 
     $scope.deleteItem = function(idx) {

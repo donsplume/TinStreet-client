@@ -39,7 +39,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     ngconstant: {
       options: {
-        name: 'app.config',
+        name: 'appconfig',
         dest: './app/scripts/config.js',
         values: grunt.file.readJSON('options.json'),
       },
