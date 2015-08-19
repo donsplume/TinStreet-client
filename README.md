@@ -6,7 +6,7 @@ First, create a file in the root directory called options.json
 and put in
 ```
 {
-    "app.config": {
+    "appconfig": {
         "basePath": "http://path.to.api/endpoint"
     }
 }
