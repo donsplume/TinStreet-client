@@ -8,20 +8,23 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": "~2.0",
-    "underscore": "~1.5",
-    "bootstrap": "~3.1",
+    "angucomplete-alt": "~1.0.3",
     "angular": "~1.2",
-    "angular-ui-router": "~0.2",
     "angular-animate": "~1.2",
-    "angular-resource": "~1.2",
+    "angular-bootstrap": "~0.10",
+    "angular-cache": "~4.3.2",
     "angular-cookies": "~1.2",
     "angular-mocks": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-ui-router": "~0.2",
     "angular-ui-utils": "~0.1",
-    "angular-bootstrap": "~0.10",
-    "moment": "~2.5",
-    "less.js": "~1.6",
+    "angular-xeditable": "~0.1.9",
+    "bootstrap": "~3.1",
     "font-awesome": "~4.0",
-    "angucomplete-alt": "~1.0.3"
+    "jquery": "~2.0",
+    "less.js": "~1.6",
+    "moment": "~2.5",
+    "ui-bootstrap": "~0.13.2",
+    "underscore": "~1.5"
   }
 }

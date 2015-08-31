@@ -1,4 +1,5 @@
-angular.module('tinstreet', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngResource', 'ngAnimate', 'appconfig', 'angucomplete-alt']);
+angular.module('tinstreet', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngResource', 'ngAnimate', 'appconfig', 'xeditable', 'ui.bootstrap', 'angular-cache']);
+
 
 angular.module('tinstreet').config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true; //To allow us to use CORS
@@ -45,4 +46,8 @@ angular.module('tinstreet').run(function($rootScope, AuthService) {
 
     AuthService.identity(true);
 
+});
+
+angular.module('tinstreet').run(function(editableOptions) {
+  editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });

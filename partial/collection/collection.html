@@ -1,19 +1,12 @@
 <div class="col-md-12" ng-controller="CollectionCtrl">
 
 <h1>{{collectionUser}}'s collection</h1>
-<form ng-submit="addToCollection(searchInstrument.title, expansionCode,condition,newCard_foil,newCard_private,newCard_public)">
-<angucomplete-alt id="newCard"
-              placeholder="Add a new card"
-              pause="400"
-              selected-object="searchInstrument"
-              remote-url-data-field="results"
-              title-field="name"
-              input-class="form-control form-control-small"
-              remote-api-handler=searchAPI
-              > </angucomplete-alt>
+<form ng-submit="addToCollection(selectedObject.name, expansionCode,condition,newCard_foil,newCard_private,newCard_public)">
 
-<select ng-model="expansionCode" ng-options="instrument.expCode as instrument.expName for instrument in searchInstrument.originalObject.instruments | unique:'instrument.expName'"></select>
-<select ng-model="condition" ng-options="instrument.condition as instrument.condition for instrument in searchInstrument.originalObject.instruments | unique:'condition'"></select>
+ <input ng-model="search" type="text" typeahead="card.name for card in groupSearchByCard($viewValue)" typeahead-on-select="onSelect($item, $model, $label)">
+
+<select ng-model="expansionCode" ng-options="instrument.expCode as instrument.expName for instrument in selectedObject.instruments | unique:'instrument.expName'"></select>
+<select ng-model="condition" ng-options="instrument.condition as instrument.condition for instrument in selectedObject.instruments | unique:'condition'"></select>
 
 
 Foil: <input type="checkbox"
@@ -24,9 +17,6 @@ Number owned on Tinstreet: <input type="text"
        ng-model="newCard_public">
        <input type="submit">
 </form>
-
-{{expansionCode}} {{condition}} {{newCard_foil}}{{newCard_private}}
-
 <table class="table table-striped">
 <thead><tr>
 <th>Name</th>
@@ -39,11 +29,11 @@ Number owned on Tinstreet: <input type="text"
 </tr></thead>
 <tbody>
 <tr ng-repeat="card in collection">
-<td>{{card.name}}</td>
-<td>{{card.expName}}</td>
-<td>{{card.condition}}</td>
-<td>{{card.foil}}</td>
-<td>{{card.privatePosition}}</td>
+<td editable-text="card.name" ng-disabled=true e-typeahead="card.name for card in groupSearchByCard($viewValue)" buttons="no" >{{card.name}}</td>
+<td editable-select="card.expCode" e-ng-options="pcard.expCode as pcard.expName for pcard in editingCard | unique:'expName'" buttons="no" onshow="searchCard(card.name)" onhide="saveModifiedCard(card)">{{card.expName}}</td>
+<td editable-select="card.condition" e-ng-options="pcard.condition as pcard.condition for pcard in editingCard | unique:'condition'" buttons="no" onshow="searchCard(card.name)" onhide="saveModifiedCard(card)">{{card.condition}}</td>
+<td editable-select="card.foil" e-ng-options="s.value as s.text for s in foilArray" buttons="no" onshow="searchCard(card.name)" onhide="saveModifiedCard(card)">{{translateFoilStatus(card.foil)}}</td>
+<td editable-text="card.privatePosition" onhide="saveModifiedCard(card)" buttons="no">{{card.privatePosition}}</td>
 <td>{{card.hostedPosition}}</td>
 <td><span ng-click="deleteItem(card.itemID)">Delete</span></td>
 </tr>
