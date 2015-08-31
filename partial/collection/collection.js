@@ -154,12 +154,12 @@ angular.module('tinstreet').controller('CollectionCtrl', function($scope, $state
 		}
 		var filtered = $scope.selectedObject.instruments.filter(function(el) {
 			return el.name === cardName &&
-				el.expCode === expCode &&
-				el.condition === condition &&
-				el.foil === foil;
+				(el.expCode === expCode || typeof expCode === 'undefined') &&
+				(el.condition === condition || typeof condition === 'undefined') &&
+				(el.foil === foil || typeof foil === 'undefined');
 		});
 		if (filtered.length === 0) {
-			//No legitimate cards have all these properties, so do nothing
+			//No legitimate instruments have all these properties, so do nothing
 		} else if (filtered.length === 1) {
 			//We have a single instrument!
 			Collection.post({}, {
@@ -174,7 +174,7 @@ angular.module('tinstreet').controller('CollectionCtrl', function($scope, $state
 			//More than one instrument matches our filters. So let's post something generic.
 			//Have we at least narrowed it down to a single printing?
 			var printingCode = filtered[0].printingCode;
-			var pcfiltered = filtered.filtered(function(el) {
+			var pcfiltered = filtered.filter(function(el) {
 				return el.printingCode = printingCode;
 			});
 			if (pcfiltered.length !== filtered.length) {
@@ -188,10 +188,15 @@ angular.module('tinstreet').controller('CollectionCtrl', function($scope, $state
 				condition: condition,
 				privatePosition: private,
 				hostedPosition: public
+			}, function(data) {
+				$scope.getCollection();
 			});
 		}
 	};
+})
 
-
-
+.filter('int_to_yn', function() {
+	return function(integer) {
+		return integer ? 'Y' : 'N';
+	};
 });
